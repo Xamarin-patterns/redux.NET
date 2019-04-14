@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Subjects;
+using System.Threading.Tasks;
 
 namespace Redux
 {
@@ -15,14 +16,25 @@ namespace Redux
 
         TState GetState();
     }
-        
+    public class AsyncStore<TState> : Store<Task<TState>>
+    {
+        public AsyncStore(Reducer<Task<TState>> reducer, Task<TState> initialState = null)
+            : base(reducer, initialState, new Middleware<Task<TState>>[0])
+        {
+        }
+        public Task DispatchAsync(IAction action)
+        {
+            _lastState = _reducer.Invoke(_lastState, action);
+            return _lastState;
+        }
+    }
     public class Store<TState> : IStore<TState>
     {
         private readonly object _syncRoot = new object();
         private readonly Dispatcher _dispatcher;
-        private readonly Reducer<TState> _reducer;
+        protected readonly Reducer<TState> _reducer;
         private readonly ReplaySubject<TState> _stateSubject = new ReplaySubject<TState>(1);
-        private TState _lastState;
+        protected TState _lastState;
 
         public Store(Reducer<TState> reducer, TState initialState = default(TState), params Middleware<TState>[] middlewares)
         {

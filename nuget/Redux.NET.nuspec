@@ -3,12 +3,12 @@
   <metadata>
     <id>Redux.NET</id>
     <version>$version$</version>
-    <title>Redux.NET</title>
-    <authors>Guillaume Salles</authors>
-    <owners>Guillaume Salles</owners>
+    <title>IronRedux.NET</title>
+    <authors>Ahmed Fouad</authors>
+    <owners>AHMED Fouad</owners>
     <projectUrl>https://github.com/GuillaumeSalles/redux.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Redux.NET is a predictable state container for .NET apps. Inspired by https://github.com/reactjs/redux.</description>
+    <description> A fork of orriginal redux.net developed by (GuillaumeSalles) Redux.NET is a predictable state container for .NET apps. Inspired by https://github.com/reactjs/redux.</description>
     <releaseNotes></releaseNotes>
     <copyright></copyright>
     <tags>Redux Redux.NET</tags>
