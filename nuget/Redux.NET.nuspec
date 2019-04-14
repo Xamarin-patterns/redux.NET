@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Redux.NET</id>
-    <version>1.0.0</version>
+    <id>IronRedux.NET</id>
+    <version>1.1.0</version>
     <title>IronRedux.NET</title>
     <authors>Ahmed Fouad</authors>
     <owners>AHMED Fouad</owners>
