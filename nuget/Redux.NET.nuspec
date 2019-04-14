@@ -2,11 +2,11 @@
 <package >
   <metadata>
     <id>Redux.NET</id>
-    <version>$version$</version>
+    <version>1.0.0</version>
     <title>IronRedux.NET</title>
     <authors>Ahmed Fouad</authors>
     <owners>AHMED Fouad</owners>
-    <projectUrl>https://github.com/GuillaumeSalles/redux.NET</projectUrl>
+    <projectUrl>https://github.com/Xamarin-patterns/redux.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description> A fork of orriginal redux.net developed by (GuillaumeSalles) Redux.NET is a predictable state container for .NET apps. Inspired by https://github.com/reactjs/redux.</description>
     <releaseNotes></releaseNotes>
