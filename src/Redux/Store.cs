@@ -25,6 +25,8 @@ namespace Redux
         public Task DispatchAsync(IAction action)
         {
             _lastState = _reducer.Invoke(_lastState, action);
+            _stateSubject.OnNext(_lastState);
+
             return _lastState;
         }
     }
@@ -33,7 +35,7 @@ namespace Redux
         private readonly object _syncRoot = new object();
         private readonly Dispatcher _dispatcher;
         protected readonly Reducer<TState> _reducer;
-        private readonly ReplaySubject<TState> _stateSubject = new ReplaySubject<TState>(1);
+        protected readonly ReplaySubject<TState> _stateSubject = new ReplaySubject<TState>(1);
         protected TState _lastState;
 
         public Store(Reducer<TState> reducer, TState initialState = default(TState), params Middleware<TState>[] middlewares)
