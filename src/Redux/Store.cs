@@ -24,8 +24,10 @@ namespace Redux
         }
         public Task DispatchAsync(IAction action)
         {
-            _lastState = _reducer.Invoke(_lastState, action);
-            return _lastState;
+            var lastState = _reducer.Invoke(_lastState, action);
+            lastState.ContinueWith(task => _lastState = task, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            return lastState;
         }
     }
     public class Store<TState> : IStore<TState>
