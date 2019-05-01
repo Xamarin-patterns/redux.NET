@@ -19,7 +19,7 @@ namespace Redux
     public class AsyncStore<TState> : Store<Task<TState>>
     {
         public AsyncStore(Reducer<Task<TState>> reducer, Task<TState> initialState = null)
-            : base(reducer, initialState, new Middleware<Task<TState>>[0])
+            : base(reducer, initialState)
         {
         }
         public Task DispatchAsync(IAction action)
