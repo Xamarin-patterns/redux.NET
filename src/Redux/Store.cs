@@ -9,7 +9,7 @@ namespace Redux
         private readonly Dispatcher _dispatcher;
         protected readonly Reducer<TState> _reducer;
         protected readonly ReplaySubject<TState> _stateSubject = new ReplaySubject<TState>(1);
-        protected readonly ReplaySubject<Error> _faultedSubject = new ReplaySubject<Error>(1);
+        protected readonly ReplaySubject<ActionDispatchingException> _faultedSubject = new ReplaySubject<ActionDispatchingException>(1);
 
         protected TState _lastState;
 
@@ -39,7 +39,7 @@ namespace Redux
             return _stateSubject
                 .Subscribe(observer);
         }
-        public IDisposable SubscribeForErrors(IObserver<Error> observer)
+        public IDisposable SubscribeForErrors(IObserver<ActionDispatchingException> observer)
         {
             return _faultedSubject
                 .Subscribe(observer);
