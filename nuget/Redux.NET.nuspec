@@ -17,6 +17,6 @@
 	</dependencies>
   </metadata>
   <files>
-	<file src="..\src\Redux\bin\release\Redux.dll" target="lib\netstandard1.1" />
+	<file src="..\src\Redux\bin\release\netstandard2.0\Redux.dll" target="lib\netstandard2.0" />
   </files>
 </package>
