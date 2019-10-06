@@ -17,13 +17,13 @@ namespace Redux
         {
             _logger = logger;
         }
-        public void LogError(Exception ex)
+        private void LogError(Exception ex)
         {
             if(_logger?.IsEnabled(LogLevel.Error)==true)
              _logger.LogError(ex,ex.Message);
         }
 
-        public void LogInformation(IAction action)
+        private void LogInformation(IAction action)
         {
             if (_logger?.IsEnabled(LogLevel.Information)==true)
                 _logger.LogInformation($"{action} excuted at {DateTime.Now}");
