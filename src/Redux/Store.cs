@@ -3,12 +3,24 @@ using System.Reactive.Subjects;
 
 namespace Redux
 {
+    public class StateChangedArgs<TState>
+    {
+        public StateChangedArgs(TState state, IAction action)
+        {
+            State = state;
+            Action = action;
+        }
+
+        public TState State { get; }
+        public IAction Action { get; }
+
+    }
     public class Store<TState> : IStore<TState>
     {
         private readonly object _syncRoot = new object();
         private readonly Dispatcher _dispatcher;
         protected readonly Reducer<TState> _reducer;
-        protected readonly ReplaySubject<TState> _stateSubject = new ReplaySubject<TState>(1);
+        protected readonly ReplaySubject<StateChangedArgs<TState>> _stateSubject = new ReplaySubject<StateChangedArgs<TState>>(1);
         protected readonly ReplaySubject<ActionDispatchingException> _faultedSubject = new ReplaySubject<ActionDispatchingException>(1);
 
         protected TState _lastState;
@@ -20,7 +32,7 @@ namespace Redux
             _dispatcher = ApplyMiddlewares(middlewares);
 
             _lastState = initialState;
-            _stateSubject.OnNext(_lastState);
+            _stateSubject.OnNext(new StateChangedArgs<TState>(_lastState,null));
         }
 
         public IAction Dispatch(IAction action,IProgress<int> progress=null)
@@ -33,7 +45,7 @@ namespace Redux
             return _lastState;
         }
         
-        public IDisposable Subscribe(IObserver<TState> observer)
+        public IDisposable Subscribe(IObserver<StateChangedArgs<TState>> observer)
         {
             
             return _stateSubject
@@ -60,7 +72,7 @@ namespace Redux
             {
                 _lastState = _reducer(_lastState, action,progress);
             }
-            _stateSubject.OnNext(_lastState);
+            _stateSubject.OnNext(new StateChangedArgs<TState>(_lastState,action));
             return action;
         }
     }

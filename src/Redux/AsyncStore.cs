@@ -36,7 +36,7 @@ namespace Redux
             {
                 _lastState = task;
                 LogInformation(action);
-                _stateSubject.OnNext(_lastState);
+                _stateSubject.OnNext(new StateChangedArgs<Task<TState>>(_lastState,action));
 
             }, TaskContinuationOptions.OnlyOnRanToCompletion);
             lastState.ContinueWith(task =>
@@ -46,5 +46,6 @@ namespace Redux
             }, TaskContinuationOptions.NotOnRanToCompletion);
             return lastState;
         }
+       
     }
 }

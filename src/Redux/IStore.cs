@@ -2,7 +2,7 @@
 
 namespace Redux
 {
-    public interface IStore<TState> : IObservable<TState>
+    public interface IStore<TState> : IObservable<StateChangedArgs<TState>>
     {
         IAction Dispatch(IAction action , IProgress<int> progress = null);
 
